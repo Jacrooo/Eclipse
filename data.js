@@ -6650,32 +6650,27 @@ let menuItems = [
         width: 100%;
     }
 
-    /* TIMING LOGIC:
-       Each step has a 6-second window. 
-       2s to fade in/stay, 1s to fade out, 3s of total silence.
-    */
+    /* Step 1: 0s to 3s */
+    .step-1 { animation: preciseFade 3s linear forwards 0s; }
 
-    /* Step 1: 0s to 3s. Silence until 6s */
-    .step-1 { animation: cinematicFade 6s linear forwards 0s; }
+    /* Step 2: 4.5s to 7.5s (1.5s gap after step 1) */
+    .step-2 { animation: preciseFade 3s linear forwards 4.5s; }
 
-    /* Step 2: Starts at 6s. Ends at 9s. Silence until 12s */
-    .step-2 { animation: cinematicFade 6s linear forwards 6s; }
+    /* Step 3: 9s to 12s (1.5s gap after step 2) */
+    .step-3 { animation: preciseFade 3s linear forwards 9s; }
 
-    /* Step 3: Starts at 12s. Ends at 15s. Silence until 20s (8s window) */
-    .step-3 { animation: cinematicFade 8s linear forwards 12s; }
+    /* Final Hub: 17s (5s gap after step 3) */
+    .final-hub { animation: finalStay 1.5s ease-out forwards 17s; }
 
-    /* Step 4: Final Hub. Starts at 20s sharp */
-    .final-hub { animation: finalStay 2s ease-out forwards 20s; }
-
-    @keyframes cinematicFade {
+    @keyframes preciseFade {
         0% { opacity: 0; visibility: visible; }
-        15%, 50% { opacity: 1; visibility: visible; } /* Visible for most of the first half */
-        65%, 100% { opacity: 0; visibility: hidden; } /* Fully gone by 65% of the duration */
+        15%, 85% { opacity: 1; visibility: visible; }
+        100% { opacity: 0; visibility: hidden; }
     }
 
     @keyframes finalStay {
-        0% { opacity: 0; visibility: hidden; transform: translateY(10px); }
-        100% { opacity: 1; visibility: visible; transform: translateY(0); }
+        0% { opacity: 0; visibility: hidden; }
+        100% { opacity: 1; visibility: visible; }
     }
 
     .hub-btn {
@@ -6687,6 +6682,7 @@ let menuItems = [
         cursor: pointer;
         text-transform: uppercase;
         font-family: 'Courier New', monospace;
+        transition: 0.3s;
     }
     .hub-btn:hover { background: #00ff00; color: #000; box-shadow: 0 0 15px #00ff00; }
 </style>
