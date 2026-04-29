@@ -6634,47 +6634,41 @@ let menuItems = [
         color: #00ff00;
         text-align: center;
         padding: 20px;
-        min-height: 300px;
+        min-height: 400px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        background: black;
     }
 
-    /* Message Base Style - Hidden by default */
     .msg { 
         opacity: 0; 
         position: absolute; 
-        width: 100%; 
         visibility: hidden;
     }
 
-    /* 1. Scanning: 0s to 3s. Blank: 3s to 6s */
-    .step-1 { animation: flashMsg 3s forwards 0s; }
+    /* Step 1: 0s to 3s (Fade in/out) | Gap until 6s */
+    .step-1 { animation: smoothFade 3s ease-in-out forwards 0s; }
 
-    /* 2. Level IV: 6s to 9s. Blank: 9s to 12s */
-    .step-2 { animation: flashMsg 3s forwards 6s; }
+    /* Step 2: 6s to 9s (Fade in/out) | Gap until 12s */
+    .step-2 { animation: smoothFade 3s ease-in-out forwards 6s; }
 
-    /* 3. Access Granted: 12s to 15s. Blank: 15s to 20s (5s gap) */
-    .step-3 { animation: flashMsg 3s forwards 12s; }
+    /* Step 3: 12s to 15s (Fade in/out) | Gap until 20s */
+    .step-3 { animation: smoothFade 3s ease-in-out forwards 12s; }
 
-    /* 4. Final Hub: Starts at 20s and stays */
-    .final-hub { 
-        animation: finalFade 1s forwards 20s; 
-        opacity: 0; 
-        visibility: hidden; 
-    }
+    /* Final Hub: Fades in at 20s and stays */
+    .final-hub { animation: finalStay 2s ease-in-out forwards 20s; }
 
-    /* Animation for the first 3 steps */
-    @keyframes flashMsg {
+    @keyframes smoothFade {
         0% { opacity: 0; visibility: visible; }
-        10%, 90% { opacity: 1; visibility: visible; }
+        20%, 80% { opacity: 1; visibility: visible; }
         100% { opacity: 0; visibility: hidden; }
     }
 
-    @keyframes finalFade {
-        from { opacity: 0; visibility: hidden; transform: translateY(10px); }
-        to { opacity: 1; visibility: visible; transform: translateY(0); }
+    @keyframes finalStay {
+        0% { opacity: 0; visibility: hidden; }
+        100% { opacity: 1; visibility: visible; }
     }
 
     .hub-btn {
@@ -6685,10 +6679,26 @@ let menuItems = [
         padding: 12px 24px;
         cursor: pointer;
         text-transform: uppercase;
-        font-family: 'Courier New', monospace;
     }
-    .hub-btn:hover { background: #00ff00; color: #000; box-shadow: 0 0 15px #00ff00; }
+    .hub-btn:hover { background: #00ff00; color: #000; box-shadow: 0 0 10px #00ff00; }
 </style>
+
+<div class="terminal-container">
+    <div class="msg step-1"><h2>> Scanning clearance...</h2></div>
+    <div class="msg step-2"><h2 style="color: #ffaa00;">> Foundational Clearance Level-IV Detected</h2></div>
+    <div class="msg step-3"><h2 style="color: #00ff00;">> Access granted.</h2></div>
+    
+    <div class="msg final-hub">
+        <h1 style="color: #fff; text-shadow: 0 0 10px #00ff00;">ECLIPSE HUB</h1>
+        <p style="max-width: 500px; color: #00ff00;">
+            Welcome to the Eclipse Hub. This is where all information regarding Site Eclipse and everything within Site Eclipse is stored. 
+            <br><br>
+            <span style="color: #ff0000; font-weight: bold;">[!] WARNING:</span> Do not attempt to look at information you are not cleared to access. 
+            Do not tell anyone outside of Site Eclipse of anything within this hub.
+        </p>
+        <button class="hub-btn" onclick="location.reload()">Return to Hub</button>
+    </div>
+</div>
         cards: [
             {
                 cardId: 'artifyber',
