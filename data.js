@@ -6652,15 +6652,22 @@ html: `
         width: 100%;
     }
 
+    /* Step 1: 0s to 3s */
     .step-1 { animation: preciseFade 3s linear forwards 0s; }
+
+    /* Step 2: 4.5s to 7.5s (1.5s gap after step 1) */
     .step-2 { animation: preciseFade 3s linear forwards 4.5s; }
+
+    /* Step 3: 9s to 12s (1.5s gap after step 2) */
     .step-3 { animation: preciseFade 3s linear forwards 9s; }
-    .final-hub { animation: finalStay 1s ease-out forwards 17s; }
+
+    /* Final Hub: 17s (5s gap after step 3) */
+    .final-hub { animation: finalStay 1.5s ease-out forwards 17s; }
 
     @keyframes preciseFade {
         0% { opacity: 0; visibility: visible; }
-        20%, 50% { opacity: 1; visibility: visible; } 
-        80%, 100% { opacity: 0; visibility: hidden; }
+        15%, 85% { opacity: 1; visibility: visible; }
+        100% { opacity: 0; visibility: hidden; }
     }
 
     @keyframes finalStay {
@@ -6677,27 +6684,10 @@ html: `
         cursor: pointer;
         text-transform: uppercase;
         font-family: 'Courier New', monospace;
+        transition: 0.3s;
     }
     .hub-btn:hover { background: #00ff00; color: #000; box-shadow: 0 0 15px #00ff00; }
 </style>
-
-<div class="terminal-container">
-    <div class="msg step-1"><h2>> Scanning clearance...</h2></div>
-    <div class="msg step-2"><h2 style="color: #ffaa00;">> Foundational Clearance Level-IV Detected</h2></div>
-    <div class="msg step-3"><h2 style="color: #00ff00;">> Access granted.</h2></div>
-    
-    <div class="msg final-hub">
-        <h1 style="color: #fff; text-shadow: 0 0 10px #00ff00;">ECLIPSE HUB</h1>
-        <p style="max-width: 500px; color: #00ff00;">
-            Welcome to the Eclipse Hub. This is where all information regarding Site Eclipse and everything within Site Eclipse is stored. 
-            <br><br>
-            <span style="color: #ff0000; font-weight: bold;">[!] WARNING:</span> Do not attempt to look at information you are not cleared to access. 
-        </p>
-        <button class="hub-btn" onclick="location.reload()">Return to Hub</button>
-    </div>
-</div>
-`, // <--- THIS COMMA AND BACKTICK ARE CRITICAL
-/* ... rest of your data.js ... */
         cards: [
             {
                 cardId: 'artifyber',
