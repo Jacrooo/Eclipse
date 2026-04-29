@@ -6650,22 +6650,24 @@ let menuItems = [
         width: 100%;
     }
 
-    /* Step 1: 0s to 3s */
+    /* Step 1: 0s to 3s (Active) | 3s to 4.5s (Dead Air) */
     .step-1 { animation: preciseFade 3s linear forwards 0s; }
 
-    /* Step 2: 4.5s to 7.5s (1.5s gap after step 1) */
+    /* Step 2: 4.5s to 7.5s (Active) | 7.5s to 9s (Dead Air) */
     .step-2 { animation: preciseFade 3s linear forwards 4.5s; }
 
-    /* Step 3: 9s to 12s (1.5s gap after step 2) */
+    /* Step 3: 9s to 12s (Active) | 12s to 17s (5s Dead Air) */
     .step-3 { animation: preciseFade 3s linear forwards 9s; }
 
-    /* Final Hub: 17s (5s gap after step 3) */
-    .final-hub { animation: finalStay 1.5s ease-out forwards 17s; }
+    /* Final Hub: 17s (Stays) */
+    .final-hub { animation: finalStay 1s ease-out forwards 17s; }
 
     @keyframes preciseFade {
         0% { opacity: 0; visibility: visible; }
-        15%, 85% { opacity: 1; visibility: visible; }
-        100% { opacity: 0; visibility: hidden; }
+        /* Text is now only fully visible for a brief moment in the middle */
+        20%, 50% { opacity: 1; visibility: visible; } 
+        /* Text starts fading out much earlier (at 50% of the 3s duration) */
+        80%, 100% { opacity: 0; visibility: hidden; }
     }
 
     @keyframes finalStay {
@@ -6682,7 +6684,6 @@ let menuItems = [
         cursor: pointer;
         text-transform: uppercase;
         font-family: 'Courier New', monospace;
-        transition: 0.3s;
     }
     .hub-btn:hover { background: #00ff00; color: #000; box-shadow: 0 0 15px #00ff00; }
 </style>
